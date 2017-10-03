@@ -1,0 +1,31 @@
+<h2>Edit Landmark: </h2>
+<form class="text" action="/landmarks/<%= @landmark.id %>" method="POST">
+  <!-- Activate MethodOverride -->
+  <input type="hidden" id="hidden" name="_method" value="PATCH">
+
+  <!-- Input name -->
+  <label for="landmark_name">Landmark Name: </label>
+  <input type="text" name="landmark[name]" id="name" placeholder="landmark name here">
+  <br></br>
+
+  <!-- Part to enter year completed -->
+  <label for="year_completed">Year Completed:</label>
+  <input type="text" id='year_completed' name="landmark[year_completed]" placeholder="enter year" value = "<%= @landmark.year_completed.to_s %>">
+  <br>
+
+
+  <!-- part to choose a figure -->
+  <p>Select your landmark's associated figure from below:</p>
+  <% @figures.each do |figure| %>
+    <input type="radio" name="landmark[figure_id]" id='figure_<%= figure.id%>' value = '<%= figure.id %>' ><%= figure.name %> <br>
+    <% end %>
+
+  <!-- Part to create new figure-->
+  <p> AND/OR create a new figure:</p>
+  <label for="new_figure">Title Name: </label>
+  <input type="text" name="figure[name]" id = 'new_figure' placeholder="figure name here">
+
+  <br></br>
+
+  <input type="submit" value="Edit Landmark">
+</form>

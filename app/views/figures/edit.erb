@@ -1,0 +1,46 @@
+<h2>Edit Figure:</h2>
+<form class="text" action="/figures/<%= @figure.id %>" method="post">
+
+  <!-- use MethodOverride -->
+  <input id='hidden' type="hidden" name="_method" value="PATCH">
+
+  <!-- Input name -->
+  <label for="figure_name">Figure Name: </label>
+  <input type="text" name="figure[name]" id="figure_name" placeholder="figure name here" value = "<%= @figure.name %>">
+
+  <!-- part to choose a title -->
+  <p>Select your figure's titles from below:</p>
+  <% @titles.each do |title| %>
+    <% if @figure.titles.include?(title) %>
+      <input type="checkbox" name="figure[title_ids][]" id='title_<%= title.id%>' value = '<%= title.id %>' checked ><%= title.name %> <br>
+    <% else %>
+      <input type="checkbox" name="figure[title_ids][]" id='title_<%= title.id%>' value = '<%= title.id %>'><%= title.name %> <br>
+    <% end %>
+  <% end %>
+
+  <!-- Part to create new title-->
+  <p> AND/OR create a new title:</p>
+  <label for="new_title">Title Name: </label>
+  <input type="text" name="title[name]" id = 'new_title' placeholder="title name here">
+
+  <!-- Part to select a landmark -->
+  <p>If it has already been created, select your figure's landmark from below: </p>
+  <% @landmarks.all.each do |landmark| %>
+    <% if @figure.landmarks.include?(landmark) %>
+      <input type="checkbox" id = 'landmark_<%= landmark.id %>' value = '<%= landmark.id%>' name="figure[landmark_ids][]" checked> <%= landmark.name %>
+      <br>
+    <% else %>
+      <input type="checkbox" id = 'landmark_<%= landmark.id %>' value = '<%= landmark.id%>' name="figure[landmark_ids][]"><%= landmark.name %>
+    <br>
+    <% end %>
+  <% end %>
+
+  <!-- part to optionally create a landmark  -->
+  <p>Otherwise, create a new landmark: </p>
+  <label for="new_landmark">Landmark Name: </label>
+  <input type="text" id='new_landmark' name="landmark[name]" placeholder = "landmark name here">
+
+  <br></br>
+
+  <input type="submit" value="Edit Figure">
+</form>

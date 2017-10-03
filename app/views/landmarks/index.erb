@@ -1,0 +1,11 @@
+index.erb
+<h2>Landmarks: </h2>
+
+<ul>
+
+<% @landmarks.each do |landmark| %>
+  <li><%= landmark.name %></li>
+    <p>Year Completed: <%= landmark.year_completed %></p>
+<% end %>
+
+</ul>
